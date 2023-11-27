@@ -12,8 +12,13 @@ function Category() {
     }, [dispatch])
     
   return (
-    <div className='w-1/6 bg-slate-100'>
-      Category
+    <div className='w-1/6 bg-slate-100 p-4 max-h-screen'>
+      <div className='border-b pb-1 text-xl font-bold  px-2'>KATEGORİ</div>
+      {
+        categories?.map((category,i)=>(
+          <div className='text-lg  cursor-pointer hover:bg-slate-200 p-2' key={i}>{category}</div>
+        ))
+      }
     </div>
   )
 }
