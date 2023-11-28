@@ -8,3 +8,21 @@ body{
     font-family: 'Nunito', sans-serif;
     
 }
+
+.paginate{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin: 25px;
+}
+
+.paginate li {
+    cursor: pointer;
+    border: solid;
+    border-color:white;
+    background-color: rgb(241 245 249);
+    border-radius: 10px;
+    padding: 5px;
+
+}

@@ -14,6 +14,12 @@ export const getProducts = createAsyncThunk("getproducts", async () => {
   return data;
 });
 
+export const getCategoryProducts = createAsyncThunk("getCategoryProducts", async (category) => {
+  const reponse = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+  const data = await reponse.json();
+  return data;
+});
+
 export const getDeatailProduct = createAsyncThunk("getDeatailProduct", async (id) => {
   const reponse = await fetch(`https://fakestoreapi.com/products/${id}`);
   const data = await reponse.json();
@@ -54,7 +60,24 @@ const productSlice = createSlice({
       //hata durumu
       .addCase(getDeatailProduct.rejected, (state, action) => {
         state.productDetailStatus = STATUS.FAIL;
-      });
-  },
+      })
+
+      /*categriy butonu için---------------------------------------------------*/
+  
+        /*Verilerin gelme durumu pending*/
+        .addCase(getCategoryProducts.pending, (state, action) => {
+          state.productsStatus = STATUS.LOADING;
+        })
+        //pending den çıkıp fulfilled yani tamamlandı durumununa gelirse ne olsun
+        .addCase(getCategoryProducts.fulfilled, (state, action) => {
+          state.productsStatus = STATUS.SUCCESS;
+          state.products = action.payload;
+        })
+        //hata durumu
+        .addCase(getCategoryProducts.rejected, (state, action) => {
+          state.productsStatus = STATUS.FAIL;
+        })
+  
+    },
 });
 export default productSlice.reducer;
